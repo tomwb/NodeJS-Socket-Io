@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<title>Bate-papo com socket.io</title>
+	<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body { font: 13px Helvetica, Arial; }
+	form { background: #bbb; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+	form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+	form button { width: 9%; background: #007DC5; border: none; padding: 10px; }
+	#mensagens { list-style-type: none; margin: 0; padding: 0; }
+	#mensagens li { padding: 5px 10px; }
+	#mensagens li:nth-child(odd) { background: #eee; }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	var socket = io();
+	$( document ).ready(function() {
+		$('form').submit(function(event){
+			event.preventDefault();
+			console.log('foi');
+			socket.emit('mensagem de chat', $('#m').val());
+			$('#m').val('');
+			return false;
+		});
+	});
+	socket.on('mensagem de chat', function(msg){
+		$('#mensagens').append($('<li>').text(msg));
+	});
+	</script>
+</head>
+<body>
+	<ul id="mensagens"></ul>
+	<form action="">
+		<input id="m" autocomplete="off" /><button>Enviar</button>
+	</form>
+</body>
+</html>
