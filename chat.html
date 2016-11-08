@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+	<title>Bate-papo com socket.io</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	// inicializo o socket
+	var socket = io();
+
+	// função para pegar parametros da url
+	$.urlParam = function(name){
+	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	    if (results==null){
+	       return null;
+	    }
+	    else{
+	       return results[1] || 0;
+	    }
+	}
+	
+	// quando conecto eu envio qual sala eu faço parte
+	socket.on('connect', function() {
+		var room = 'sala' + $.urlParam('sala');
+		if ( ! room ) {
+			room = 'sala' + 1;
+		}
+	    socket.emit('room', room);
+	});
+
+	// fico ouvindo o socket
+	socket.on('receiver_chat_message', function(msg){
+		$('#mensagens').append($('<li>').text(msg));
+	});
+
+
+	$( document ).ready(function() {		
+
+		$('form').submit(function(event){
+			event.preventDefault();
+
+			// envio a mensagem pro chat
+			socket.emit('send_chat_mensseger', $('#inputSendMesseger').val() );
+
+			// limpo o campo de texto
+			$('#inputSendMesseger').val('');
+			return false;
+		});
+	});
+	</script>
+</head>
+<body>
+	<div class="content">
+		<h1> sala </h1>
+		<ul id="mensagens"></ul>
+		<form action="">
+			<input id="inputSendMesseger" autocomplete="off" /><button>Enviar</button>
+		</form>
+	</div>
+</body>
+</html>

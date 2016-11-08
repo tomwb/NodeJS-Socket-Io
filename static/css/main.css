@@ -1,0 +1,65 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box; 
+}
+body {
+	background-color: #CDCDCD;
+	font: 13px Helvetica, Arial; 
+}
+.content {
+	width: 960px;
+	height: 100vh;
+	margin: 0 auto;
+	background-color: #FFFFFF;
+	padding: 30px;
+}
+
+.content h1 {
+	text-align: center;
+	margin-bottom: 50px;
+	text-transform: uppercase;
+}
+.content ul a {
+	background-color: #DEDEDE;
+	width: 100%;
+	list-style: none;
+    font-size: 17px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #000000;
+    text-decoration: none;
+    display: block;
+}
+.content ul a:hover {
+	background-color: #ADADAD;
+}
+
+
+form { 
+	position: fixed; 
+	bottom: 20px; 
+	width: 900px; 
+	padding: 10px; 
+	background: #CDCDCD; 
+	margin: 0 auto;
+}
+form input { 
+	border: 0; 
+	padding: 10px; 
+	width: 90%; 
+	margin-right: .5%; 
+	font-size: 14px;
+}
+form button { 
+	width: 9%; 
+	background: #444444; 
+	border: none; 
+	padding: 10px;
+	color: #FFFFFF;
+	font-size: 16px;
+}
+#mensagens { list-style-type: none; margin: 0; padding: 0; }
+#mensagens li { padding: 5px 10px; }
+#mensagens li:nth-child(odd) { background: #eee; }
